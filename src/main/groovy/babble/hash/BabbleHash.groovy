@@ -1,15 +1,15 @@
-package st.babble.hash
+package babble.hash
 
 import com.google.common.hash.HashFunction
 import com.google.common.hash.Hashing
-import st.babble.library.Library
+import babble.library.Library
 
-class HashBuilder {
+class BabbleHash {
 
     HashFunction hashFunction
     Library library
 
-    HashBuilder(HashFunction hashFunction = Hashing.murmur3_32(), Library library = new Library()) {
+    BabbleHash(HashFunction hashFunction = Hashing.murmur3_32(), Library library = new Library()) {
         this.hashFunction = hashFunction
         this.library = library
     }
@@ -27,7 +27,7 @@ class HashBuilder {
         return "${getWord(bytes1)}${getWord(bytes2)}${String.format("%05X", new BigInteger(bytes3))}"
     }
 
-    String getWord(byte[] index) {
-        return library.words[new BigInteger(index).mod(library.words.length).intValue()].capitalize()
+    String getWord(byte[] indexBytes) {
+        return library.words[new BigInteger(indexBytes).mod(library.words.length).intValue()].capitalize()
     }
 }

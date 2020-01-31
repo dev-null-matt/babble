@@ -1,13 +1,12 @@
-package st.babble
+package babble
 
-import com.google.common.hash.Hashing
-import st.babble.hash.HashBuilder
+import babble.hash.BabbleHash
 
 class Babble {
 
     static void main(String[] args) {
 
-        HashBuilder hb = new HashBuilder(Hashing.sha256())
+        BabbleHash hb = new BabbleHash()
 
         ["brit.indrelie@smartthings.com",
          "matthew.rick@smartthings.com",

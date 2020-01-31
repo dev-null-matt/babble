@@ -1,4 +1,4 @@
-package st.babble.library
+package babble.library
 
 import org.yaml.snakeyaml.Yaml
 
@@ -13,5 +13,9 @@ class Library {
     Library(File configFile, String libraryKey) {
         Map<String, Object> obj = new Yaml().load(new FileReader(configFile))
         this.words = (obj.get(libraryKey)as List<String>).toArray()
+    }
+
+    Library(Collection<String> library) {
+        this.words = library.sort().toArray()
     }
 }

@@ -6,7 +6,7 @@ buildscript {
 
 apply plugin: "groovy"
 
-group = 'st.babble'
+group = 'babble'
 
 repositories {
     mavenCentral()
@@ -16,4 +16,8 @@ dependencies {
     implementation "org.codehaus.groovy:groovy-all:2.5.9"
     implementation "com.google.guava:guava:19.0"
     implementation "org.yaml:snakeyaml:1.25"
+
+    testImplementation "org.spockframework:spock-core:1.3-groovy-2.5"
+    testRuntime "cglib:cglib:3.3.0"
+    testRuntime "org.objenesis:objenesis:3.1"
 }
