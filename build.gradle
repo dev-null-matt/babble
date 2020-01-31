@@ -1,0 +1,19 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+}
+
+apply plugin: "groovy"
+
+group = 'st.babble'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.codehaus.groovy:groovy-all:2.5.9"
+    implementation "com.google.guava:guava:19.0"
+    implementation "org.yaml:snakeyaml:1.25"
+}
