@@ -14,9 +14,9 @@ class BabbleHash {
         this.dictionary = dictionary
     }
 
-    String hash(String input) {
+    String hash(byte[] input) {
 
-        byte[] bytes = hashFunction.hashBytes(input.getBytes()).asBytes()
+        byte[] bytes = hashFunction.hashBytes(input).asBytes()
 
         int segmentLength = (bytes.length - 2) / 2
 
@@ -27,18 +27,15 @@ class BabbleHash {
         return "${getWord(bytes1)}${getWord(bytes2)}${formatNumeric(new BigInteger(1, bytes3).toString())}"
     }
 
+    String hash(String input) {
+        return hash(input.getBytes())
+    }
+
     String formatNumeric(String numeric) {
         "00000${numeric}".substring(numeric.length())
     }
 
     String getWord(byte[] indexBytes) {
         return dictionary.getWord(indexBytes).capitalize()
-    }
-
-    static void main(String[] args) {
-
-        BabbleHash babbleHash = new BabbleHash()
-
-        println babbleHash.hash("matthew.rick@smartthings.com")
     }
 }

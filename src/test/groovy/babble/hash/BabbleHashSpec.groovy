@@ -33,25 +33,21 @@ class BabbleHashSpec extends Specification {
         def hashFunction = Mock(HashFunction.class)
         def subject = new BabbleHash(dictionary: dictionary, hashFunction: hashFunction)
 
-        byte[] fooBytes = firstBytes
-        byte[] barBytes = secondBytes
-
         when:
         def actual = subject.hash("")
 
         then:
-        1 * dictionary.getWord(fooBytes) >> "foo"
-        1 * dictionary.getWord(barBytes) >> "bar"
+        1 * dictionary.getWord(firstBytes) >> "foo"
+        1 * dictionary.getWord(secondBytes) >> "bar"
         1 * hashFunction.hashBytes(_) >> hashCode
 
         and:
         actual == expected
 
         where:
-        hashCode                                   | firstBytes                | secondBytes              | expected
-        hash([100, 55, 50, 100] as byte[])         | [100 as byte]             | [55 as byte]             | "FooBar12900"
-        hash([100, 90, 55, 54, 50, 100] as byte[]) | [100 as byte, 90 as byte] | [55 as byte, 54 as byte] | "FooBar12900"
-
+        hashCode                                                         | firstBytes          | secondBytes        | expected
+        new HashCode.BytesHashCode([100, 55, 50, 100] as byte[])         | [100] as byte[]     | [55] as byte[]     | "FooBar12900"
+        new HashCode.BytesHashCode([100, 90, 55, 54, 50, 100] as byte[]) | [100, 90] as byte[] | [55, 54] as byte[] | "FooBar12900"
     }
 
     def "Correctly formats the numeric segment of the name, by padding to 5 characters"() {
@@ -73,9 +69,5 @@ class BabbleHashSpec extends Specification {
         "ccc"   | "00ccc"
         "dddd"  | "0dddd"
         "eeeee" | "eeeee"
-    }
-
-    HashCode hash(byte[] byteHash) {
-        return new HashCode.BytesHashCode(byteHash)
     }
 }
