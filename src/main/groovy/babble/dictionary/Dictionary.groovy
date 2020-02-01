@@ -7,7 +7,7 @@ class Dictionary {
     String[] words = []
 
     Dictionary() {
-        this(new File("src/main/resources/library.yml"), "library")
+        this(new File("src/main/resources/dictionary.yml"), "words")
     }
 
     Dictionary(File configFile, String libraryKey) {

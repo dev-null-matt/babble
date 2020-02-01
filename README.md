@@ -26,7 +26,7 @@ BabbleHash yamlHash = new BabbleHash(library: yamlLib)
 ```
 
 ### Custom Hashing Functions
-Babble by default will use a 32 byte murmur3 hash to digest the supplied string to hash. If desired, this algorithm can be replaced with a different one, for example, if a cryptographic hash is desired. Guava's `Hashing` contains a variety of hash functions that can be passed to the `BabbleHash` class's constructor.
+Babble by default will use a 128 bit murmur3 hash to digest the supplied string to hash. If desired, this algorithm can be replaced with a different one, for example, if a cryptographic hash is desired. Guava's `Hashing` contains a variety of hash functions that can be passed to the `BabbleHash` class's constructor.
 
 ```
 // From guava
