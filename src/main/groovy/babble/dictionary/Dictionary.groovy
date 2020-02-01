@@ -1,21 +1,25 @@
-package babble.library
+package babble.dictionary
 
 import org.yaml.snakeyaml.Yaml
 
-class Library {
+class Dictionary {
 
     String[] words = []
 
-    Library() {
+    Dictionary() {
         this(new File("src/main/resources/library.yml"), "library")
     }
 
-    Library(File configFile, String libraryKey) {
+    Dictionary(File configFile, String libraryKey) {
         Map<String, Object> obj = new Yaml().load(new FileReader(configFile))
         this.words = (obj.get(libraryKey)as List<String>).toArray()
     }
 
-    Library(Collection<String> library) {
+    Dictionary(Collection<String> library) {
         this.words = library.sort().toArray()
+    }
+
+    String getWord(byte[] indexBytes) {
+        words[new BigInteger(indexBytes).mod(words.length).intValue()]
     }
 }

@@ -2,14 +2,14 @@ package babble.hash
 
 import com.google.common.hash.HashFunction
 import com.google.common.hash.Hashing
-import babble.library.Library
+import babble.dictionary.Dictionary
 
 class BabbleHash {
 
     HashFunction hashFunction
-    Library library
+    Dictionary library
 
-    BabbleHash(HashFunction hashFunction = Hashing.murmur3_32(), Library library = new Library()) {
+    BabbleHash(HashFunction hashFunction = Hashing.murmur3_32(), Dictionary library = new Dictionary()) {
         this.hashFunction = hashFunction
         this.library = library
     }
@@ -28,6 +28,6 @@ class BabbleHash {
     }
 
     String getWord(byte[] indexBytes) {
-        return library.words[new BigInteger(indexBytes).mod(library.words.length).intValue()].capitalize()
+        return library.getWord(indexBytes).capitalize()
     }
 }

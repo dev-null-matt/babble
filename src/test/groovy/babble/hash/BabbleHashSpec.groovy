@@ -1,6 +1,6 @@
 package babble.hash
 
-import babble.library.Library
+import babble.dictionary.Dictionary
 import spock.lang.Specification
 
 class BabbleHashSpec extends Specification {
@@ -8,7 +8,7 @@ class BabbleHashSpec extends Specification {
     def "builds a consistent hash value"() {
 
         given:
-        def subject = new BabbleHash(library: new Library(["aaa", "bbb", "ccc", "ddd"]))
+        def subject = new BabbleHash(library: new Dictionary(["aaa", "bbb", "ccc", "ddd"]))
 
         when:
         def result1 = subject.hash(input)

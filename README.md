@@ -11,23 +11,27 @@ bh.hash("foo@bar.com") // output is "ForestCloud03264"
 ```
 
 ### Custom Libraries
-Babble by default tries to create an inoffensive hash value by using a curated library of words.  If you want to use a different library of words, you can load a custom library from a yaml file.  Bear in mind that a small library could lead to hash collisions.
+Babble by default tries to create an inoffensive hash value by using a curated dictionary of words.  If you want to use a different dictionary of words, you can load a custom dictionary from a yaml file.  Bear in mind that a small dictionary could lead to hash collisions.
 
-The size of the hash set for the default babble implementation is `library_size ^ 2 * 2 ^ 16`.
+The size of the hash set for the default babble implementation is `dictionary_size ^ 2 * 2 ^ 16`.
 
 ```
-// Construct the library from a java.util.Collection
-Library collectionLib = new Library(["fox", "kilo", "alpha"])
+// Construct the dictionary from a java.util.Collection
+Dictionary collectionDict = new Dictionary(["fox", "kilo", "alpha"])
 BabbleHash collectionHash = new BabbleHash(library: collectionLib)
 
 // Read library from a yaml file
-Library yamlLib = new Library(new File("path/to/file", "yamlKey")
+Dictionary yamlDict = new Dictionary(new File("path/to/file", "yamlKey")
 BabbleHash yamlHash = new BabbleHash(library: yamlLib)
 ```
 
 ### Custom Hashing Functions
-Babble by default will use a 32 byte murmur3 hash to digest the supplied string to hash. If desired, this algorithm can be replaced with a different one, for example, if a cryptographic hash is desired. Guave `Hashing` contains a variety of hash functions that can be passed to the `BabbleHash` class's constructor.
+Babble by default will use a 32 byte murmur3 hash to digest the supplied string to hash. If desired, this algorithm can be replaced with a different one, for example, if a cryptographic hash is desired. Guava's `Hashing` contains a variety of hash functions that can be passed to the `BabbleHash` class's constructor.
 
 ```
+// From guava
+import com.google.common.hash.HashFunction
+import com.google.common.hash.Hashing
+
 BabbleHash cryptoHash = new BabbleHash(hashFunction: Hashing.sha256())
 ```
